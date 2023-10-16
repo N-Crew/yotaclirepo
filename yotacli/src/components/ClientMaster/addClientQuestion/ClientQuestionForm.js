@@ -5,6 +5,9 @@ import { useForm, useFieldArray, Controller, useWatch } from "react-hook-form";
 import ReactDOM from "react-dom";
 import "./styles.css";
 import { placeholder } from "@babel/types";
+import { createClientQuestion } from "../../../redux/features/client/CreateClientQuestionSlice"; 
+import { useDispatch } from "react-redux";
+
 
 const ClientQuestionForm = (props) => {
  
@@ -14,14 +17,25 @@ const ClientQuestionForm = (props) => {
     },
   });
 
+  const dispatch = useDispatch();
+ // const [clientQuestion, setclientQuestion] = useState({});
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "test",
   });
-
+  
+//  const getTechnologyData = (e) => {
+//   setclientQuestion({ ...technologies, [e.target.name]: e.target.value });
+//     console.log(technologies);
+//   }; 
   const onSubmit = (data) => {
     // window.location.reload();
+   // e.preventDefault();
     console.log("data---------", data);
+    dispatch(createClientQuestion(data));
+    //window.location.reload();
+    alert("technology created successfully");
   
   };
 
